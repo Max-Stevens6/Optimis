@@ -1,0 +1,70 @@
+{
+  "founded": 2026,
+  "members": 25,
+  "instagram": "",
+  "linkedin": "",
+  "footer_text": "De studievereniging van Technische Bedrijfskunde aan Hogeschool Windesheim in Zwolle.",
+  "contact": {
+    "info": "info@sv-optimis.nl",
+    "activiteiten": "activiteiten@sv-optimis.nl",
+    "address": "Hogeschool Windesheim\nCampus 2\nZwolle"
+  },
+  "nav": [
+    {
+      "href": "/",
+      "label": "Home",
+      "short": ""
+    },
+    {
+      "href": "/over-ons",
+      "label": "Over ons",
+      "short": ""
+    },
+    {
+      "href": "/samenwerkingen",
+      "label": "Samenwerkingen",
+      "short": ""
+    },
+    {
+      "href": "/activiteiten",
+      "label": "Activiteiten",
+      "short": ""
+    },
+    {
+      "href": "/stagemarkt",
+      "label": "Stagemarkt & Vacatures",
+      "short": ""
+    },
+    {
+      "href": "/over-tbk",
+      "label": "Over Technische Bedrijfskunde",
+      "short": "Over TBK"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact",
+      "short": ""
+    }
+  ],
+  "cta_label": "Word Lid!",
+  "sponsor_section": {
+    "title": "Mogelijk gemaakt door",
+    "text": "Deze bedrijven steunen S.V. Optimis en brengen ons dichter bij het werkveld.",
+    "cta_title": "Word Sponsor!",
+    "cta_text": "Zet je bedrijf op de kaart bij TBK-talent."
+  },
+  "sponsors": [
+    {
+      "name": "Staalcampus_dz",
+      "tier": "Goud",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "name": "totaalBED dz",
+      "tier": "Zilver",
+      "url": "",
+      "logo": ""
+    }
+  ]
+}

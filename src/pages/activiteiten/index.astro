@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ActivityCard from '../../components/ActivityCard.astro';
+import { CATEGORIES } from '../../lib/utils';
+import d from '../../data/pages/activiteiten.json';
+
+const now = new Date();
+const all = await getCollection('activities');
+const upcoming = all.filter((a) => a.data.date >= now).sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+const past = all.filter((a) => a.data.date < now).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const btn = 'filter-btn rounded-full border-2 border-navy/20 bg-white px-4 py-2 text-sm font-bold text-navy transition hover:border-navy aria-pressed:border-navy aria-pressed:bg-navy aria-pressed:text-white';
+---
+<Base title="Activiteiten" description={d.meta_description}>
+  <PageHeader title={d.title} intro={d.intro} />
+
+  <section class="section bg-paper">
+    <div class="wrap">
+      <div role="group" aria-label="Filter op categorie" class="flex flex-wrap gap-2">
+        <button type="button" class={btn} data-filter="alle" aria-pressed="true">{d.filter_all_label}</button>
+        {CATEGORIES.map((c) => <button type="button" class={btn} data-filter={c} aria-pressed="false">{c}</button>)}
+      </div>
+      <p id="teller" class="mt-4 text-sm text-steel" role="status" aria-live="polite"></p>
+
+      <div data-section class="mt-10">
+        <h2 class="h2">{d.upcoming_title}</h2>
+        {upcoming.length ? (
+          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {upcoming.map((e) => <ActivityCard entry={e} />)}
+          </div>
+        ) : <p class="mt-4 text-steel">{d.upcoming_empty}</p>}
+      </div>
+
+      {past.length > 0 && (
+        <div data-section class="mt-16">
+          <h2 class="h2">{d.past_title}</h2>
+          <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {past.map((e) => <ActivityCard entry={e} past />)}
+          </div>
+        </div>
+      )}
+
+      <p id="leeg" hidden class="mt-10 rounded-2xl border border-dashed border-mist p-8 text-center text-steel">
+        {d.filter_empty}
+      </p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('[data-activity]');
+  const sections = document.querySelectorAll<HTMLElement>('[data-section]');
+  const teller = document.getElementById('teller')!;
+  const leeg = document.getElementById('leeg')!;
+
+  function apply(filter: string) {
+    let visible = 0;
+    cards.forEach((c) => {
+      const show = filter === 'alle' || c.dataset.category === filter;
+      c.hidden = !show;
+      if (show) visible++;
+    });
+    sections.forEach((s) => { s.hidden = !s.querySelector('[data-activity]:not([hidden])') && !!s.querySelector('[data-activity]'); });
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
+    leeg.hidden = visible > 0;
+    teller.textContent = `${visible} ${visible === 1 ? 'activiteit' : 'activiteiten'}${filter === 'alle' ? '' : ` in ${filter}`}`;
+    const url = new URL(location.href);
+    filter === 'alle' ? url.searchParams.delete('categorie') : url.searchParams.set('categorie', filter);
+    history.replaceState(null, '', url);
+  }
+
+  buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter!)));
+  const start = new URLSearchParams(location.search).get('categorie');
+  apply([...buttons].some((b) => b.dataset.filter === start) ? start! : 'alle');
+</script>

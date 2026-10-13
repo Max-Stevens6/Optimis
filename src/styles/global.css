@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "@fontsource/lilita-one";
+@import "@fontsource-variable/dm-sans";
+
+/* Huisstijl S.V. Optimis */
+@theme {
+  --font-display: "Lilita One", ui-rounded, system-ui, sans-serif;
+  --font-sans: "DM Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Accenten */
+  --color-navy: #0b1141;   /* donkerblauw, logo-basis */
+  --color-royal: #1a3275;  /* middenblauw, fris accent */
+  --color-gold: #daa520;   /* inktvis en details */
+  /* Contrast */
+  --color-night: #050820;
+  --color-deep: #1d243a;
+  --color-steel: #47526e;
+  --color-mist: #8c97b2;
+  /* Basis */
+  --color-paper: #f0f3f8;
+  --color-snow: #f9fafc;
+  --color-pearl: #ececec;
+  /* Status */
+  --color-ok: #115e3b;
+  --color-info: #1b52c4;
+  --color-warn: #e09000;
+  --color-bad: #a92525;
+  --color-active: #f3b021;
+  /* Sponsoren */
+  --color-tier-gold: #daa520;
+  --color-tier-silver: #708090;
+  --color-tier-bronze: #b8860b;
+}
+
+@utility wrap {
+  margin-inline: auto;
+  max-width: 72rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 40rem) { padding-inline: 2rem; }
+}
+
+@layer base {
+  html { color-scheme: light; scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { @apply bg-paper font-sans text-steel antialiased; }
+  h1, h2, h3, h4 { @apply font-display text-navy tracking-wide text-balance; }
+  :focus-visible { outline: 2px solid var(--color-info); outline-offset: 3px; border-radius: 4px; }
+  .dark-area :focus-visible { outline-color: var(--color-active); }
+  ::selection { background: var(--color-gold); color: var(--color-night); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+}
+
+/* Lilita One heeft één gewicht: nooit vet laten nabootsen. */
+h1, h2, h3, h4, .font-display { font-weight: 400 !important; font-synthesis: none; }
+
+@layer components {
+  .btn-primary { @apply inline-flex items-center justify-center rounded-full bg-gold px-5 py-2.5 text-sm font-bold text-night transition hover:bg-active; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-full border-2 border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-gold hover:text-gold; }
+  .btn-outline { @apply inline-flex items-center justify-center rounded-full border-2 border-navy/30 px-5 py-2.5 text-sm font-semibold text-navy transition hover:border-navy hover:bg-navy hover:text-white; }
+  .section { @apply py-16 sm:py-24; }
+  .h2 { @apply text-3xl sm:text-5xl; }
+  .lede { @apply max-w-prose text-lg leading-relaxed text-steel; }
+
+  .md { @apply max-w-prose text-base leading-7 text-steel; }
+  .md > * + * { @apply mt-4; }
+  .md strong { @apply font-semibold text-navy; }
+  .md a { @apply text-info underline underline-offset-4; }
+  .md ul { @apply list-disc space-y-1 pl-5; }
+  .md ol { @apply list-decimal space-y-1 pl-5; }
+  .md h2, .md h3 { @apply mt-8 text-2xl; }
+}
+
+/* Eén georkestreerd moment: de badge draait de hero in. */
+@keyframes badge-in {
+  from { transform: rotate(-14deg) scale(.88); opacity: 0; }
+  to { transform: rotate(0) scale(1); opacity: 1; }
+}
+.badge-in { animation: badge-in 1.1s cubic-bezier(.2, .8, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) { .badge-in { animation: none; } }

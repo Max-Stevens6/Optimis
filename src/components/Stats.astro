@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import site from '../data/site.json';
+import home from '../data/pages/home.json';
+
+const activities = await getCollection('activities');
+const stats = [
+  { value: site.founded, label: home.stats_labels.founded, plain: true },
+  { value: site.members, label: home.stats_labels.members },
+  { value: activities.length, label: home.stats_labels.activities },
+  { value: site.sponsors.length, label: home.stats_labels.sponsors },
+];
+---
+<section aria-label="Optimis in cijfers" class="dark-area bg-royal">
+  <dl class="wrap grid grid-cols-2 gap-y-8 py-10 md:grid-cols-4">
+    {stats.map((s) => (
+      <div class="md:border-l md:border-white/20 md:pl-6 md:first:border-l-0 md:first:pl-0">
+        <dd
+          class="font-display text-5xl tabular-nums text-gold sm:text-6xl"
+          data-count={s.plain ? undefined : s.value}
+        >{s.value}</dd>
+        <dt class="mt-1 text-sm text-white/80">{s.label}</dt>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<script>
+  // Teller loopt op zodra de statistieken in beeld komen. Zonder JS of met
+  // "minder beweging" blijft de eindwaarde gewoon staan.
+  const els = document.querySelectorAll<HTMLElement>('[data-count]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        io.unobserve(e.target);
+        const el = e.target as HTMLElement;
+        const end = Number(el.dataset.count);
+        const start = performance.now();
+        const dur = 1100;
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / dur, 1);
+          el.textContent = String(Math.round(end * (1 - Math.pow(1 - p, 3))));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.6 });
+    els.forEach((el) => io.observe(el));
+  }
+</script>

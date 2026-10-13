@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SponsorBanner from '../components/SponsorBanner.astro';
+import d from '../data/pages/samenwerkingen.json';
+---
+<Base title="Samenwerkingen" description={d.meta_description}>
+  <PageHeader title={d.title} intro={d.intro} />
+
+  <section class="section bg-paper">
+    <div class="wrap">
+      <h2 class="h2">{d.options_title}</h2>
+      <dl class="mt-10 divide-y divide-pearl border-y border-pearl">
+        {d.options.map((o) => (
+          <div class="grid gap-2 py-7 md:grid-cols-[1fr_1.5fr] md:gap-10">
+            <dt class="font-display text-2xl text-navy">{o.title}</dt>
+            <dd class="leading-relaxed text-steel">{o.text}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href="/contact?onderwerp=sponsor#formulier" class="btn-primary">{d.sponsor_button}</a>
+        <a href="/contact?onderwerp=vacature#formulier" class="btn-outline">{d.vacancy_button}</a>
+      </div>
+    </div>
+  </section>
+
+  <SponsorBanner />
+</Base>

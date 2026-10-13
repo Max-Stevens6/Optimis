@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ActivityVisual from '../../components/ActivityVisual.astro';
+import { categoryStyles, excerpt } from '../../lib/utils';
+import { formatLong, formatTime } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const all = await getCollection('activities');
+  return all.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, date, location, category, image } = entry.data;
+const isPast = date < new Date();
+---
+<Base title={title} description={excerpt(entry.body, 155)}>
+  <article class="wrap py-12 sm:py-16">
+    <a href="/activiteiten" class="text-sm font-semibold text-info hover:underline">Terug naar activiteiten</a>
+    <div class="mt-6 grid gap-10 lg:grid-cols-[1.2fr_1fr]">
+      <div class="aspect-[16/10] overflow-hidden rounded-3xl border border-pearl">
+        <ActivityVisual image={image} category={category} alt={title} />
+      </div>
+      <div>
+        <span class:list={['rounded-full px-3 py-1 text-xs font-bold', categoryStyles[category]]}>{category}</span>
+        <h1 class="mt-4 text-4xl sm:text-6xl">{title}</h1>
+        <dl class="mt-6 space-y-3 text-steel">
+          <div><dt class="text-sm font-bold text-navy">Wanneer</dt><dd><time datetime={date.toISOString()}>{formatLong(date)}, {formatTime(date)} uur</time></dd></div>
+          <div><dt class="text-sm font-bold text-navy">Waar</dt><dd>{location}</dd></div>
+        </dl>
+        {isPast
+          ? <p class="mt-8 rounded-xl border border-pearl p-4 text-sm text-steel">Deze activiteit is voorbij. Bekijk wat er nog meer komt.</p>
+          : <a href={`/contact?onderwerp=activiteit&activiteit=${encodeURIComponent(title)}#formulier`} class="btn-primary mt-8 !px-7 !py-3.5 !text-base">Meld je aan</a>}
+      </div>
+    </div>
+    <div class="md mt-12"><Content /></div>
+  </article>
+</Base>

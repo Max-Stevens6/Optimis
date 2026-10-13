@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CtaBand from '../components/CtaBand.astro';
+import VacancyCard from '../components/VacancyCard.astro';
+import d from '../data/pages/stagemarkt.json';
+
+const all = (await getCollection('vacancies')).sort((a, b) => a.data.title.localeCompare(b.data.title, 'nl'));
+const isStage = (t: string) => t === 'Stage' || t === 'Afstudeerstage';
+const stages = all.filter((v) => isStage(v.data.type));
+const jobs = all.filter((v) => !isStage(v.data.type));
+---
+<Base title="Stagemarkt & Vacatures" description={d.meta_description}>
+  <PageHeader title={d.title} intro={d.intro} />
+
+  <div class="border-b border-pearl bg-white">
+    <nav aria-label="Op deze pagina" class="wrap flex gap-3 py-4">
+      <a href="#stages" class="btn-outline !py-2">{d.stages_title}</a>
+      <a href="#vacatures" class="btn-outline !py-2">{d.vacancies_title}</a>
+    </nav>
+  </div>
+
+  <section id="stages" class="section scroll-mt-20 bg-paper" aria-labelledby="stages-kop">
+    <div class="wrap">
+      <h2 id="stages-kop" class="h2">{d.stages_title}</h2>
+      <p class="lede mt-3">{d.stages_text}</p>
+      {stages.length ? (
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {stages.map((v) => <VacancyCard vacancy={v} viewLabel={d.view_label} />)}
+        </ul>
+      ) : <p class="mt-10 rounded-2xl border-2 border-dashed border-mist p-8 text-center">{d.stages_empty}</p>}
+    </div>
+  </section>
+
+  <section id="vacatures" class="section scroll-mt-20 bg-white" aria-labelledby="vacatures-kop">
+    <div class="wrap">
+      <h2 id="vacatures-kop" class="h2">{d.vacancies_title}</h2>
+      <p class="lede mt-3">{d.vacancies_text}</p>
+      {jobs.length ? (
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {jobs.map((v) => <VacancyCard vacancy={v} viewLabel={d.view_label} />)}
+        </ul>
+      ) : <p class="mt-10 rounded-2xl border-2 border-dashed border-mist p-8 text-center">{d.vacancies_empty}</p>}
+    </div>
+  </section>
+
+  <CtaBand title={d.cta.title} text={d.cta.text} href="/contact?onderwerp=vacature#formulier" label={d.cta.label} />
+</Base>

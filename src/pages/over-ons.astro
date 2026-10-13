@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CtaBand from '../components/CtaBand.astro';
+import BoardCard from '../components/BoardCard.astro';
+import { paragraphs } from '../lib/utils';
+import d from '../data/pages/over-ons.json';
+
+const board = (await getCollection('board'))
+  .filter((m) => m.data.active)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<Base title="Over ons" description={d.meta_description}>
+  <PageHeader title={d.title} intro={d.intro} />
+
+  <section class="section bg-paper">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <h2 class="h2">{d.why_title}</h2>
+        <div class="md mt-5">{paragraphs(d.why_text).map((p) => <p>{p}</p>)}</div>
+        {d.image && <img src={d.image} alt={d.image_alt} loading="lazy" class="mt-8 w-full rounded-2xl object-cover" />}
+      </div>
+      <ul class="divide-y divide-pearl border-y border-pearl">
+        {d.pillars.map((p) => (
+          <li class="grid gap-2 py-7 sm:grid-cols-[12rem_1fr] sm:gap-8">
+            <h3 class="text-3xl text-royal">{p.title}</h3>
+            <p class="leading-relaxed text-steel">{p.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="bestuur" class="section scroll-mt-20 bg-white">
+    <div class="wrap">
+      <h2 class="h2">{d.board_title}</h2>
+      <p class="lede mt-3">{d.board_intro}</p>
+      {board.length ? (
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {board.map((m) => <BoardCard member={m} />)}
+        </ul>
+      ) : (
+        <p class="mt-10 rounded-2xl border-2 border-dashed border-mist p-8 text-center">{d.board_empty}</p>
+      )}
+    </div>
+  </section>
+
+  <CtaBand title={d.cta.title} text={d.cta.text} href="/contact?onderwerp=lid#formulier" label={d.cta.label} />
+</Base>

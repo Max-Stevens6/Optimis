@@ -1,0 +1,17 @@
+{
+  "meta_description": "Stage- en werkplekken en vacatures voor studenten Technische Bedrijfskunde in Zwolle en omgeving.",
+  "title": "Stagemarkt & Vacatures",
+  "intro": "Op zoek naar een stage, afstudeerplek of baan? Bedrijven uit ons netwerk zoeken Technische Bedrijfskundigen.",
+  "stages_title": "Stages en afstudeerplekken",
+  "stages_text": "Doe praktijkervaring op tijdens je studie.",
+  "stages_empty": "Er staan nog geen stages online. Kom snel terug.",
+  "vacancies_title": "Vacatures",
+  "vacancies_text": "Open posities bij bedrijven, om na of naast je studie aan het werk te gaan.",
+  "vacancies_empty": "Er staan nog geen vacatures online. Kom snel terug.",
+  "view_label": "Bekijk vacature",
+  "cta": {
+    "title": "Heb je een plek voor een TBK'er?",
+    "text": "Plaats je stage of vacature gratis bij S.V. Optimis en bereik studenten Technische Bedrijfskunde direct.",
+    "label": "Plaats een vacature"
+  }
+}

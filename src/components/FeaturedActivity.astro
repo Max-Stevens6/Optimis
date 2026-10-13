@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import home from '../data/pages/home.json';
+import ActivityVisual from './ActivityVisual.astro';
+import { categoryStyles, excerpt } from '../lib/utils';
+import { formatDay, formatMonthShort, formatLong, formatTime } from '../lib/dates';
+
+// Eerstvolgende activiteit, bepaald op bouwmoment (zie README: dagelijkse rebuild).
+const now = new Date();
+const next = (await getCollection('activities'))
+  .filter((a) => a.data.date >= now)
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())[0];
+---
+<section class="section bg-paper" aria-labelledby="uitgelicht">
+  <div class="wrap">
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <h2 id="uitgelicht" class="h2">{home.featured_title}</h2>
+      <a href="/activiteiten" class="hidden text-sm font-bold text-info hover:underline sm:block">Alle activiteiten</a>
+    </div>
+
+    {next ? (
+      <article class="dark-area grid overflow-hidden rounded-3xl bg-navy shadow-xl lg:grid-cols-2">
+        <div class="relative min-h-64 lg:min-h-96">
+          <div class="absolute inset-0"><ActivityVisual image={next.data.image} category={next.data.category} alt={next.data.title} /></div>
+          <div class="absolute left-5 top-5 rounded-2xl bg-gold px-4 py-3 text-center text-night">
+            <div class="font-display text-4xl leading-none">{formatDay(next.data.date)}</div>
+            <div class="mt-1 text-sm font-bold">{formatMonthShort(next.data.date)}</div>
+          </div>
+        </div>
+        <div class="flex flex-col justify-center p-7 sm:p-10">
+          <span class:list={['w-fit rounded-full px-3 py-1 text-xs font-bold', categoryStyles[next.data.category] === categoryStyles.Gala ? 'bg-gold text-night' : categoryStyles[next.data.category]]}>{next.data.category}</span>
+          <h3 class="mt-4 text-4xl !text-white sm:text-5xl">{next.data.title}</h3>
+          <p class="mt-3 text-mist">
+            <time datetime={next.data.date.toISOString()}>{formatLong(next.data.date)}, {formatTime(next.data.date)} uur</time>
+            <br />{next.data.location}
+          </p>
+          <p class="mt-4 text-white/80">{excerpt(next.body, 220)}</p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href={`/activiteiten/${next.id}`} class="btn-primary">Bekijk details</a>
+            <a href={`/contact?onderwerp=activiteit&activiteit=${encodeURIComponent(next.data.title)}#formulier`} class="btn-ghost">Meld je aan</a>
+          </div>
+        </div>
+      </article>
+    ) : (
+      <div class="rounded-3xl border-2 border-dashed border-mist/50 p-10 text-center">
+        <p class="font-display text-2xl text-navy">{home.featured_empty_title}</p>
+        <p class="mt-1">{home.featured_empty_text}</p>
+        <a href="/activiteiten" class="btn-outline mt-5">Naar het overzicht</a>
+      </div>
+    )}
+  </div>
+</section>

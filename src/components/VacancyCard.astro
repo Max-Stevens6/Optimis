@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { excerpt } from '../lib/utils';
+interface Props { vacancy: CollectionEntry<'vacancies'>; viewLabel: string }
+const { vacancy: v, viewLabel } = Astro.props;
+---
+<li class="relative flex flex-col rounded-2xl border border-pearl bg-white p-6 shadow-sm transition hover:border-gold hover:shadow-lg">
+  <span class="w-fit rounded-full bg-navy px-3 py-1 text-xs font-bold text-gold">{v.data.type}</span>
+  <h3 class="mt-4 text-2xl leading-tight">
+    {v.data.url
+      ? <a href={v.data.url} rel="noopener" class="after:absolute after:inset-0 hover:text-info">{v.data.title}</a>
+      : v.data.title}
+  </h3>
+  <p class="mt-1 text-sm font-semibold text-navy">{v.data.company}{v.data.location && <span class="font-normal text-steel"> in {v.data.location}</span>}</p>
+  <p class="mt-3 flex-1 text-sm leading-relaxed">{excerpt(v.body, 160)}</p>
+  {v.data.url && <span class="mt-5 text-sm font-bold text-info">{viewLabel}</span>}
+</li>

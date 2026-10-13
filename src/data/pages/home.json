@@ -1,0 +1,18 @@
+{
+  "meta_description": "Dé studievereniging van Technische Bedrijfskunde op Hogeschool Windesheim in Zwolle. Activiteiten, netwerken en stages.",
+  "hero_title": "Dé studievereniging van Technische Bedrijfskunde op Hogeschool Windesheim",
+  "hero_text": "S.V. Optimis brengt studenten en werkveld samen in Zwolle: borrels, gastcolleges, een gala en de stagemarkt.",
+  "hero_primary_label": "Word Lid!",
+  "hero_secondary_label": "Bekijk activiteiten",
+  "hero_image": "",
+  "hero_image_alt": "Logo van S.V. Optimis: een gouden inktvis in een donkerblauwe badge",
+  "stats_labels": {
+    "founded": "Opgericht in",
+    "members": "Leden",
+    "activities": "Activiteiten",
+    "sponsors": "Sponsoren"
+  },
+  "featured_title": "Eerstvolgende activiteit",
+  "featured_empty_title": "Er staat nog geen activiteit gepland.",
+  "featured_empty_text": "Binnenkort volgt de volgende. Bekijk ondertussen eerdere activiteiten."
+}

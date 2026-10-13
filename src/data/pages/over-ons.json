@@ -1,0 +1,22 @@
+{
+  "meta_description": "S.V. Optimis verbindt het werkveld, netwerken en gezelligheid voor studenten Technische Bedrijfskunde in Zwolle.",
+  "title": "Een vereniging voor studenten die verder kijken dan het collegerooster",
+  "intro": "S.V. Optimis is de studievereniging van Technische Bedrijfskunde aan Hogeschool Windesheim in Zwolle. Opgericht in 2026, door en voor TBK-studenten.",
+  "image": "",
+  "image_alt": "",
+  "why_title": "Waarom Optimis?",
+  "why_text": "De naam zegt het al: we kijken optimistisch vooruit. Technische Bedrijfskundigen verbeteren processen, organisaties en de wereld om zich heen. Daar hoort een vereniging bij die studenten helpt dat vak te leren kennen, en elkaar.\n\nWe werken samen met bedrijven uit de regio en met andere studieverenigingen, zodat jij verder komt dan alleen de lesstof.",
+  "pillars": [
+    { "title": "Werkveld", "text": "We halen het bedrijfsleven naar de opleiding met gastcolleges, bedrijfsbezoeken en een eigen stagemarkt. Zo weet je al tijdens je studie wat je straks kunt verwachten." },
+    { "title": "Netwerken", "text": "Een goed netwerk begint met kennismaken. Op onze activiteiten ontmoet je medestudenten, alumni en professionals uit Zwolle en omgeving." },
+    { "title": "Gezelligheid", "text": "Studeren is meer dan colleges. Borrels, een gala en andere activiteiten zorgen dat je je thuis voelt bij TBK." }
+  ],
+  "board_title": "Het bestuur",
+  "board_intro": "Maak kennis met de studenten die S.V. Optimis dit jaar draaiende houden.",
+  "board_empty": "Het bestuur wordt binnenkort voorgesteld.",
+  "cta": {
+    "title": "Kom erbij",
+    "text": "Lid worden is gratis kennismaken met je opleiding, het werkveld en je medestudenten.",
+    "label": "Word Lid!"
+  }
+}

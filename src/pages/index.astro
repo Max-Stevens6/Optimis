@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Stats from '../components/Stats.astro';
+import FeaturedActivity from '../components/FeaturedActivity.astro';
+import SponsorBanner from '../components/SponsorBanner.astro';
+import home from '../data/pages/home.json';
+---
+<Base description={home.meta_description}>
+  <section class="dark-area relative isolate overflow-hidden bg-navy">
+    <div class="wrap grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-[1.4fr_1fr] lg:py-32">
+      <div>
+        <h1 class="text-5xl leading-[1.05] !text-white sm:text-7xl">{home.hero_title}</h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-mist">{home.hero_text}</p>
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/contact?onderwerp=lid#formulier" class="btn-primary !px-7 !py-3.5 !text-base">{home.hero_primary_label}</a>
+          <a href="/activiteiten" class="btn-ghost !px-7 !py-3.5 !text-base">{home.hero_secondary_label}</a>
+        </div>
+      </div>
+      <img src={home.hero_image || '/images/logo.png'} alt={home.hero_image_alt} width="640" height="640"
+        class:list={['badge-in order-first mx-auto w-48 sm:w-64 lg:order-none lg:w-full lg:max-w-md', home.hero_image && 'rounded-3xl object-cover']} />
+    </div>
+  </section>
+
+  <Stats />
+  <FeaturedActivity />
+  <SponsorBanner />
+</Base>

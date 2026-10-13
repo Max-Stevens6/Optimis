@@ -1,0 +1,13 @@
+{
+  "meta_description": "Neem contact op met S.V. Optimis of schrijf je in als lid.",
+  "title": "Contact",
+  "intro": "Een vraag, een idee of zin om lid te worden? Stuur ons een bericht.",
+  "general_title": "Algemene vragen",
+  "activities_title": "Activiteiten",
+  "location_title": "Waar vind je ons?",
+  "form_title": "Stuur ons een bericht",
+  "submit_label": "Verstuur bericht",
+  "privacy_note": "We gebruiken je gegevens alleen om je bericht te beantwoorden.",
+  "success_message": "Bedankt! We hebben je bericht ontvangen en reageren zo snel mogelijk.",
+  "error_message": "Versturen is niet gelukt. Probeer het opnieuw of mail naar info@sv-optimis.nl."
+}

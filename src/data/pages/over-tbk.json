@@ -1,0 +1,25 @@
+{
+  "meta_description": "Wat is Technische Bedrijfskunde aan Hogeschool Windesheim in Zwolle? Een korte introductie op de opleiding.",
+  "title": "Over Technische Bedrijfskunde",
+  "intro": "Techniek en bedrijfskunde in één opleiding aan Hogeschool Windesheim. Je leert hoe organisaties slimmer, efficiënter en duurzamer werken.",
+  "image": "",
+  "image_alt": "",
+  "left_title": "Wat doet een Technisch Bedrijfskundige?",
+  "left_text": "Een Technisch Bedrijfskundige begrijpt zowel de technische kant als de bedrijfskant van een organisatie. Je werkt aan verbeteringen in productie, logistiek en dienstverlening, en vormt de schakel tussen techniek en management.\n\nTijdens de opleiding werk je aan praktijkopdrachten voor echte bedrijven en loop je stage in het werkveld.",
+  "more_text": "Meer weten over inschrijven, het programma of open dagen?",
+  "more_label": "Kijk op windesheim.nl",
+  "more_url": "https://www.windesheim.nl",
+  "themes_title": "Thema's in de opleiding",
+  "themes": [
+    { "title": "Logistiek en supply chain", "text": "Hoe komen producten efficiënt van leverancier naar klant?" },
+    { "title": "Procesverbetering", "text": "Knelpunten vinden en oplossen met methoden als Lean en Six Sigma." },
+    { "title": "Projectmanagement", "text": "Technische projecten plannen, aansturen en afronden." },
+    { "title": "Data en besluitvorming", "text": "Cijfers vertalen naar keuzes waar een organisatie wat aan heeft." },
+    { "title": "Duurzaam ondernemen", "text": "Techniek en bedrijfsvoering inzetten voor een toekomstbestendige organisatie." }
+  ],
+  "cta": {
+    "title": "Studeer je TBK in Zwolle?",
+    "text": "Dan hoort S.V. Optimis bij jouw studententijd. Word lid en ontmoet je jaargenoten.",
+    "label": "Word Lid!"
+  }
+}

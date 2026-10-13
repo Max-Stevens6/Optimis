@@ -1,0 +1,11 @@
+---
+interface Props { title: string; intro?: string }
+const { title, intro } = Astro.props;
+---
+<section class="dark-area relative overflow-hidden border-b-4 border-gold bg-navy">
+  <img src="/images/logo.png" alt="" aria-hidden="true" class="pointer-events-none absolute -right-16 -top-10 hidden w-80 rotate-12 opacity-10 md:block" />
+  <div class="wrap relative py-14 sm:py-20">
+    <h1 class="max-w-3xl text-4xl !text-white sm:text-6xl">{title}</h1>
+    {intro && <p class="mt-5 max-w-prose text-lg leading-relaxed text-mist">{intro}</p>}
+  </div>
+</section>

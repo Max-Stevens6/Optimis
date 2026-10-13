@@ -1,0 +1,572 @@
+# PagesCMS configuratie voor S.V. Optimis
+# Docs: https://pagescms.org/docs/configuration/
+
+media:
+- name: activiteiten
+  label: Activiteit-afbeeldingen
+  input: public/images/activiteiten
+  output: /images/activiteiten
+- name: bestuur
+  label: Bestuursfoto's
+  input: public/images/bestuur
+  output: /images/bestuur
+- name: paginas
+  label: Pagina-afbeeldingen
+  input: public/images/paginas
+  output: /images/paginas
+- name: sponsors
+  label: Sponsorlogo's
+  input: public/images/sponsors
+  output: /images/sponsors
+content:
+- name: activities
+  label: Activiteiten
+  type: collection
+  path: src/content/activities
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - date
+    - category
+    - location
+    primary: title
+    sort:
+    - date
+    default:
+      sort: date
+      order: desc
+  fields:
+  - name: title
+    label: Titel
+    type: string
+    required: true
+  - name: date
+    label: Datum en tijd
+    type: date
+    required: true
+    options:
+      time: true
+  - name: location
+    label: Locatie
+    type: string
+    required: true
+  - name: category
+    label: Categorie
+    type: select
+    required: true
+    options:
+      values:
+      - Borrel
+      - Gala
+      - Gastcollege
+      - Stagemarkt
+  - name: image
+    label: Afbeelding
+    type: image
+    options:
+      media: activiteiten
+  - name: body
+    label: Beschrijving
+    type: rich-text
+- name: board
+  label: Bestuursleden
+  type: collection
+  path: src/content/board
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - name
+    - role
+    - order
+    - active
+    primary: name
+    sort:
+    - order
+    default:
+      sort: order
+      order: asc
+  fields:
+  - name: name
+    label: Naam
+    type: string
+    required: true
+  - name: role
+    label: Functie
+    type: string
+    required: true
+  - name: image
+    label: Foto
+    type: image
+    options:
+      media: bestuur
+  - name: order
+    label: Volgorde (1 = bovenaan)
+    type: number
+  - name: active
+    label: Actief bestuurslid (toon op de site)
+    type: boolean
+    default: true
+  - name: body
+    label: Korte beschrijving
+    type: rich-text
+- name: vacancies
+  label: Stages & vacatures
+  type: collection
+  path: src/content/vacancies
+  format: yaml-frontmatter
+  filename: '{primary}.md'
+  view:
+    fields:
+    - title
+    - company
+    - type
+    primary: title
+  fields:
+  - name: title
+    label: Functietitel
+    type: string
+    required: true
+  - name: company
+    label: Bedrijf
+    type: string
+    required: true
+  - name: type
+    label: Soort (Stage en Afstudeerstage komen onder "Stages", de rest onder "Vacatures")
+    type: select
+    required: true
+    options:
+      values:
+      - Stage
+      - Afstudeerstage
+      - Bijbaan
+      - Traineeship
+      - Vaste baan
+  - name: location
+    label: Plaats
+    type: string
+  - name: url
+    label: Link naar vacature (of mailto:)
+    type: string
+  - name: body
+    label: Korte omschrijving
+    type: rich-text
+- name: page-home
+  label: 'Pagina: Home'
+  type: file
+  path: src/data/pages/home.json
+  format: json
+  fields:
+  - &id001
+    name: meta_description
+    label: Zoekmachine-beschrijving (SEO)
+    type: text
+  - name: hero_title
+    label: 'Hero: titel'
+    type: text
+  - name: hero_text
+    label: 'Hero: tekst'
+    type: text
+  - name: hero_primary_label
+    label: 'Hero: eerste knop'
+    type: string
+  - name: hero_secondary_label
+    label: 'Hero: tweede knop'
+    type: string
+  - name: hero_image
+    label: 'Hero: afbeelding (leeg = logo)'
+    type: image
+    options:
+      media: paginas
+  - name: hero_image_alt
+    label: 'Hero: alt-tekst afbeelding'
+    type: string
+  - name: stats_labels
+    label: 'Statistieken: labels'
+    type: object
+    fields:
+    - name: founded
+      label: Oprichting
+      type: string
+    - name: members
+      label: Leden
+      type: string
+    - name: activities
+      label: Activiteiten
+      type: string
+    - name: sponsors
+      label: Sponsoren
+      type: string
+  - name: featured_title
+    label: Titel uitgelichte activiteit
+    type: string
+  - name: featured_empty_title
+    label: 'Als er niets gepland staat: titel'
+    type: string
+  - name: featured_empty_text
+    label: 'Als er niets gepland staat: tekst'
+    type: text
+- name: page-over-ons
+  label: 'Pagina: Over ons'
+  type: file
+  path: src/data/pages/over-ons.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: text
+  - name: intro
+    label: Intro
+    type: text
+  - name: why_title
+    label: Kop verhaal
+    type: string
+  - name: why_text
+    label: Tekst verhaal (lege regel = nieuwe alinea)
+    type: text
+  - name: image
+    label: Afbeelding (optioneel)
+    type: image
+    options:
+      media: paginas
+  - name: image_alt
+    label: Alt-tekst afbeelding
+    type: string
+  - name: pillars
+    label: Pijlers
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    list: true
+  - name: board_title
+    label: 'Bestuur: kop'
+    type: string
+  - name: board_intro
+    label: 'Bestuur: intro'
+    type: text
+  - name: board_empty
+    label: 'Bestuur: tekst als er geen leden zijn'
+    type: text
+  - name: cta
+    label: Knop-blok onderaan
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    - name: label
+      label: Knoptekst
+      type: string
+- name: page-samenwerkingen
+  label: 'Pagina: Samenwerkingen'
+  type: file
+  path: src/data/pages/samenwerkingen.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: text
+  - name: intro
+    label: Intro
+    type: text
+  - name: options_title
+    label: Kop opties
+    type: string
+  - name: options
+    label: Samenwerkingsopties
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    list: true
+  - name: sponsor_button
+    label: 'Knop: sponsor'
+    type: string
+  - name: vacancy_button
+    label: 'Knop: vacature plaatsen'
+    type: string
+- name: page-activiteiten
+  label: 'Pagina: Activiteiten'
+  type: file
+  path: src/data/pages/activiteiten.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: string
+  - name: intro
+    label: Intro
+    type: text
+  - name: filter_all_label
+    label: Filterknop "alles"
+    type: string
+  - name: upcoming_title
+    label: Kop komende activiteiten
+    type: string
+  - name: upcoming_empty
+    label: Tekst als er niets gepland staat
+    type: text
+  - name: past_title
+    label: Kop eerdere activiteiten
+    type: string
+  - name: filter_empty
+    label: Tekst bij lege categorie
+    type: text
+- name: page-stagemarkt
+  label: 'Pagina: Stagemarkt & Vacatures'
+  type: file
+  path: src/data/pages/stagemarkt.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: string
+  - name: intro
+    label: Intro
+    type: text
+  - name: stages_title
+    label: Kop stages
+    type: string
+  - name: stages_text
+    label: Tekst stages
+    type: text
+  - name: stages_empty
+    label: Tekst zonder stages
+    type: text
+  - name: vacancies_title
+    label: Kop vacatures
+    type: string
+  - name: vacancies_text
+    label: Tekst vacatures
+    type: text
+  - name: vacancies_empty
+    label: Tekst zonder vacatures
+    type: text
+  - name: view_label
+    label: Linktekst op kaartjes
+    type: string
+  - name: cta
+    label: Knop-blok onderaan
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    - name: label
+      label: Knoptekst
+      type: string
+- name: page-over-tbk
+  label: 'Pagina: Over Technische Bedrijfskunde'
+  type: file
+  path: src/data/pages/over-tbk.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: string
+  - name: intro
+    label: Intro
+    type: text
+  - name: left_title
+    label: Kop linkerkolom
+    type: string
+  - name: left_text
+    label: Tekst (lege regel = nieuwe alinea)
+    type: text
+  - name: more_text
+    label: Tekst voor de link
+    type: string
+  - name: more_label
+    label: Linktekst
+    type: string
+  - name: more_url
+    label: Link (leeg = geen link)
+    type: string
+  - name: image
+    label: Afbeelding (optioneel)
+    type: image
+    options:
+      media: paginas
+  - name: image_alt
+    label: Alt-tekst afbeelding
+    type: string
+  - name: themes_title
+    label: Kop thema's
+    type: string
+  - name: themes
+    label: Thema's
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    list: true
+  - name: cta
+    label: Knop-blok onderaan
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    - name: label
+      label: Knoptekst
+      type: string
+- name: page-contact
+  label: 'Pagina: Contact'
+  type: file
+  path: src/data/pages/contact.json
+  format: json
+  fields:
+  - *id001
+  - name: title
+    label: Paginatitel
+    type: string
+  - name: intro
+    label: Intro
+    type: text
+  - name: general_title
+    label: Kop algemene vragen
+    type: string
+  - name: activities_title
+    label: Kop activiteiten
+    type: string
+  - name: location_title
+    label: Kop locatie
+    type: string
+  - name: form_title
+    label: 'Formulier: titel'
+    type: string
+  - name: submit_label
+    label: 'Formulier: verzendknop'
+    type: string
+  - name: privacy_note
+    label: 'Formulier: privacytekst'
+    type: text
+  - name: success_message
+    label: 'Formulier: succesmelding'
+    type: text
+  - name: error_message
+    label: 'Formulier: foutmelding'
+    type: text
+- name: site
+  label: 'Algemeen: contactgegevens, menu, sponsoren'
+  type: file
+  path: src/data/site.json
+  format: json
+  fields:
+  - name: founded
+    label: Oprichtingsjaar
+    type: number
+    required: true
+  - name: members
+    label: Aantal leden
+    type: number
+    required: true
+  - name: instagram
+    label: Instagram-URL
+    type: string
+  - name: linkedin
+    label: LinkedIn-URL
+    type: string
+  - name: footer_text
+    label: Tekst in de footer
+    type: text
+  - name: cta_label
+    label: Tekst van de hoofdknop in het menu
+    type: string
+  - name: contact
+    label: Contactgegevens
+    type: object
+    fields:
+    - name: info
+      label: E-mail algemeen
+      type: string
+    - name: activiteiten
+      label: E-mail activiteiten
+      type: string
+    - name: address
+      label: Adres (elke regel op een nieuwe regel)
+      type: text
+  - name: nav
+    label: Menu
+    type: object
+    fields:
+    - name: href
+      label: Pagina-link (laat staan tenzij je weet wat je doet)
+      type: string
+    - name: label
+      label: Naam in menu
+      type: string
+    - name: short
+      label: Korte naam op desktop (optioneel)
+      type: string
+    list: true
+  - name: sponsor_section
+    label: Sponsorblok
+    type: object
+    fields:
+    - name: title
+      label: Titel
+      type: string
+    - name: text
+      label: Tekst
+      type: text
+    - name: cta_title
+      label: Titel sponsor-knop
+      type: string
+    - name: cta_text
+      label: Tekst sponsor-knop
+      type: string
+  - name: sponsors
+    label: Sponsoren
+    type: object
+    fields:
+    - name: name
+      label: Naam
+      type: string
+      required: true
+    - name: tier
+      label: Sponsorpakket
+      type: select
+      options:
+        values:
+        - Goud
+        - Zilver
+        - Brons
+    - name: url
+      label: Website
+      type: string
+    - name: logo
+      label: Logo
+      type: image
+      options:
+        media: sponsors
+    list: true

@@ -1,0 +1,12 @@
+---
+import { categoryGradients, type Category } from '../lib/utils';
+interface Props { image?: string; category: Category; alt?: string; class?: string }
+const { image, category, alt = '', class: cls = '' } = Astro.props;
+---
+{image ? (
+  <img src={image} alt={alt} loading="lazy" decoding="async" class:list={['h-full w-full object-cover', cls]} />
+) : (
+  <div aria-hidden="true" class:list={['flex h-full w-full items-center justify-center bg-gradient-to-br', categoryGradients[category], cls]}>
+    <img src="/images/logo.png" alt="" class="h-1/2 max-h-40 w-auto opacity-90" loading="lazy" />
+  </div>
+)}

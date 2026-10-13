@@ -1,0 +1,14 @@
+{
+  "meta_description": "Zo komt jouw bedrijf in contact met talent van Technische Bedrijfskunde in Zwolle.",
+  "title": "Ontmoet het TBK-talent van morgen",
+  "intro": "Wil je studenten Technische Bedrijfskunde leren kennen? Samen met S.V. Optimis kom je op een laagdrempelige manier in contact.",
+  "options_title": "Zo werken we samen",
+  "options": [
+    { "title": "Gastcollege of workshop", "text": "Deel jouw kennis met studenten en laat zien wat Technische Bedrijfskunde in de praktijk betekent." },
+    { "title": "Stagemarkt en vacatures", "text": "Plaats stages, afstudeeropdrachten of banen en spreek geïnteresseerde studenten op onze stagemarkt." },
+    { "title": "Sponsoring", "text": "Verbind je merk aan S.V. Optimis en wordt zichtbaar op onze activiteiten, website en social media." },
+    { "title": "Bedrijfsbezoek of casus", "text": "Laat studenten meedenken over een echte uitdaging of neem ze mee de productiehal in." }
+  ],
+  "sponsor_button": "Word Sponsor!",
+  "vacancy_button": "Plaats een vacature"
+}

@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { paragraphs } from '../lib/utils';
+import d from '../data/pages/over-tbk.json';
+---
+<Base title="Over Technische Bedrijfskunde" description={d.meta_description}>
+  <PageHeader title={d.title} intro={d.intro} />
+
+  <section class="section bg-paper">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+      <div>
+        <h2 class="h2">{d.left_title}</h2>
+        <div class="md mt-5">
+          {paragraphs(d.left_text).map((p) => <p>{p}</p>)}
+          {d.more_url && <p>{d.more_text} <a href={d.more_url} rel="noopener">{d.more_label}</a>.</p>}
+        </div>
+        {d.image && <img src={d.image} alt={d.image_alt} loading="lazy" class="mt-8 w-full rounded-2xl object-cover" />}
+      </div>
+      <div>
+        <h2 class="h2">{d.themes_title}</h2>
+        <dl class="mt-6 divide-y divide-pearl border-y border-pearl">
+          {d.themes.map((t) => (
+            <div class="py-5">
+              <dt class="font-display text-xl text-navy">{t.title}</dt>
+              <dd class="mt-1 text-steel">{t.text}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={d.cta.title} text={d.cta.text} href="/contact?onderwerp=lid#formulier" label={d.cta.label} />
+</Base>
