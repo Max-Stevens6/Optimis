@@ -1,5 +1,5 @@
 ---
-name: Naam volgt
+name: Test
 role: Voorzitter
 order: 1
 active: true
