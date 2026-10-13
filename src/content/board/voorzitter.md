@@ -1,5 +1,5 @@
 ---
-name: Test
+name: Test2
 role: Voorzitter
 order: 1
 active: true
